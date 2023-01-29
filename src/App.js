@@ -15,24 +15,24 @@ const App = () => {
   const minTime = 480;
   const maxTime = 660;
   const [time, setTime] = useState(minTime);
-  const [carTrip, setCarTrip] = useState([]);
+  const [generalCarTrip, setGeneralCarTrip] = useState([]);
   const [electricCarTrip, setElectricCarTrip] = useState([]);
-  const [tourLoc, setTourLoc] = useState([]);
-  const [parkingLotLoc, setParkingLotLoc] = useState([]);
+  const [buildingLoc, setBuildingLoc] = useState([]);
+  const [electricCarParkingLotLoc, setElectricCarParkingLotLoc] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const getFetchData = async () => {
-      const carTrip = await getData("car_trip");
+      const generalCarTrip = await getData("general_car_trip");
       const electricCarTrip = await getData("electric_car_trip");
-      const tourLoc = await getData("tour_loc");
-      const parkingLotLoc = await getData("parking_loc");
+      const buildingLoc = await getData("building_loc");
+      const electricCarParkingLotLoc = await getData("electric_parking_loc");
 
-      if (carTrip && electricCarTrip && tourLoc && parkingLotLoc) {
-        setCarTrip((prev) => carTrip);
+      if (generalCarTrip && electricCarTrip && buildingLoc && electricCarParkingLotLoc) {
+        setGeneralCarTrip((prev) => generalCarTrip);
         setElectricCarTrip((prev) => electricCarTrip);
-        setTourLoc((prev) => tourLoc);
-        setParkingLotLoc((prev) => parkingLotLoc);
+        setBuildingLoc((prev) => buildingLoc);
+        setElectricCarParkingLotLoc((prev) => electricCarParkingLotLoc);
         setLoaded(true);
       }
     };
@@ -45,9 +45,8 @@ const App = () => {
       {loaded ?
         <>
           <Trip
-            carTrip={carTrip}
-            tourLoc={tourLoc}
-            parkingLotLoc={parkingLotLoc}
+            generalCarTrip={generalCarTrip}
+            buildingLoc={buildingLoc}
             minTime={minTime}
             maxTime={maxTime}
             time={time}
@@ -55,8 +54,8 @@ const App = () => {
           ></Trip>
           <Trip
             electricCarTrip={electricCarTrip}
-            tourLoc={tourLoc}
-            parkingLotLoc={parkingLotLoc}
+            buildingLoc={buildingLoc}
+            electricCarParkingLotLoc={electricCarParkingLotLoc}
             minTime={minTime}
             maxTime={maxTime}
             time={time}

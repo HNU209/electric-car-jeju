@@ -5,8 +5,8 @@ import {AmbientLight, PointLight, LightingEffect} from '@deck.gl/core';
 import { TripsLayer } from '@deck.gl/geo-layers';
 import { IconLayer } from '@deck.gl/layers';
 import Slider from "@mui/material/Slider";
-import '../css/trip.css';
 import legend from '../img/legend.png';
+import '../css/trip.css';
 
 const ambientLight = new AmbientLight({
     color: [255, 255, 255],
@@ -53,26 +53,16 @@ const ICON_MAPPING = {
     marker: {x: 0, y: 0, width: 128, height: 128, mask: true}
 };
 
-const getDestColor = data => {
-    if (data.type === '1') {
-        return [255, 0, 0];
-    } else if (data.type === '2') {
-        return [0, 255, 0];
-    } else if (data.type === '3') {
-        return [0, 0, 255];
-    }
-};
-
 const Trip = props => {
     const minTime = props.minTime;
     const maxTime = props.maxTime;
     const time = props.time;
     const animationSpeed = 1;
 
-    const carTrip = props.carTrip;
+    const generalCarTrip = props.generalCarTrip;
     const electricCarTrip = props.electricCarTrip;
-    const tourLoc = props.tourLoc;
-    const parkingLotLoc = props.parkingLotLoc;
+    const buildingLoc = props.buildingLoc;
+    const electricCarParkingLotLoc = props.electricCarParkingLotLoc;
 
     const [animationFrame, setAnimationFrame] = useState('');
 
@@ -90,11 +80,11 @@ const Trip = props => {
 
     const layers = [
         new TripsLayer({
-            id: 'car-trip',
-            data: carTrip,
+            id: 'general-car-trip',
+            data: generalCarTrip,
             getPath: d => d.trip,
             getTimestamps: d => d.timestamp,
-            getColor: d => getDestColor(d),
+            getColor: d => d.type === 'foot' ? [255, 255, 255] : [255, 0, 0],
             opacity: 1,
             widthMinPixels: 5,
             trailLength: 1,
@@ -107,7 +97,7 @@ const Trip = props => {
             data: electricCarTrip,
             getPath: d => d.trip,
             getTimestamps: d => d.timestamp,
-            getColor: d => getDestColor(d),
+            getColor: d => d.type === 'foot' ? [255, 255, 255] : [0, 0, 255],
             opacity: 1,
             widthMinPixels: 5,
             trailLength: 1,
@@ -116,22 +106,8 @@ const Trip = props => {
             shadowEnabled: false,
         }),
         new IconLayer({
-            id: 'tour-point',
-            data: tourLoc,
-            pickable: false,
-            iconAtlas: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/icon-atlas.png',
-            iconMapping: ICON_MAPPING,
-            sizeMinPixels: 12,
-            sizeMaxPixels: 12,
-            sizeScale: 3,
-            getIcon: d => 'marker',
-            getPosition: d => d.point,
-            getSize: d => 5,
-            getColor: d => [255, 0, 0]
-        }),
-        new IconLayer({
-            id: 'parking-lot-point',
-            data: parkingLotLoc,
+            id: 'building-point',
+            data: buildingLoc,
             pickable: false,
             iconAtlas: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/icon-atlas.png',
             iconMapping: ICON_MAPPING,
@@ -142,6 +118,20 @@ const Trip = props => {
             getPosition: d => d.point,
             getSize: d => 5,
             getColor: d => [255, 255, 0]
+        }),
+        new IconLayer({
+            id: 'electric-parking-lot-point',
+            data: electricCarParkingLotLoc,
+            pickable: false,
+            iconAtlas: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/icon-atlas.png',
+            iconMapping: ICON_MAPPING,
+            sizeMinPixels: 12,
+            sizeMaxPixels: 12,
+            sizeScale: 3,
+            getIcon: d => 'marker',
+            getPosition: d => d.point,
+            getSize: d => 5,
+            getColor: d => [255, 0, 0]
         }),
     ];
 
