@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/electric-car-jeju/static/css/main.35c600d7.css",
-    "main.js": "/electric-car-jeju/static/js/main.175c2e8a.js",
+    "main.js": "/electric-car-jeju/static/js/main.b2a62555.js",
     "static/js/483.69db93bb.chunk.js": "/electric-car-jeju/static/js/483.69db93bb.chunk.js",
     "static/js/787.41e0b6a8.chunk.js": "/electric-car-jeju/static/js/787.41e0b6a8.chunk.js",
     "service-worker.js": "/electric-car-jeju/service-worker.js",
     "index.html": "/electric-car-jeju/index.html",
     "main.35c600d7.css.map": "/electric-car-jeju/static/css/main.35c600d7.css.map",
-    "main.175c2e8a.js.map": "/electric-car-jeju/static/js/main.175c2e8a.js.map",
+    "main.b2a62555.js.map": "/electric-car-jeju/static/js/main.b2a62555.js.map",
     "483.69db93bb.chunk.js.map": "/electric-car-jeju/static/js/483.69db93bb.chunk.js.map",
     "787.41e0b6a8.chunk.js.map": "/electric-car-jeju/static/js/787.41e0b6a8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.35c600d7.css",
-    "static/js/main.175c2e8a.js"
+    "static/js/main.b2a62555.js"
   ]
 }
