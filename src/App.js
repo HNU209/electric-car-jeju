@@ -44,7 +44,7 @@ const App = () => {
       {isLoaded && (
         <>
           <Trip
-            name={"일반차량"}
+            name={"택시"}
             generalCarTrip={generalCarTrip}
             buildingLoc={buildingLoc}
           ></Trip>
